@@ -376,12 +376,100 @@
     letter-spacing: 0.04em;
   }
 
+  /* ===== ACTION BUTTONS ===== */
+  .hero-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 32px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .hero-action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border: 1px solid var(--border);
+    background: var(--white);
+    color: var(--green);
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+  }
+  .hero-action-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+  .hero-action-btn:hover {
+    background: var(--green);
+    color: var(--cream);
+    border-color: var(--green);
+  }
+  .action-buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+    justify-content: center;
+  }
+  .action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 24px;
+    border: 1px solid var(--gold-light);
+    background: transparent;
+    color: var(--gold-light);
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .action-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+  .action-btn:hover {
+    background: var(--gold-light);
+    color: var(--green);
+  }
+
+  /* ===== TOAST ===== */
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: var(--dark);
+    color: var(--cream);
+    padding: 12px 28px;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 4px;
+    opacity: 0;
+    transition: all 0.4s ease;
+    pointer-events: none;
+    z-index: 300;
+    white-space: nowrap;
+  }
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
   /* ===== RESPONSIVE ===== */
   @media (max-width: 640px) {
     .specs-grid { grid-template-columns: 1fr; }
     .hero-meta { gap: 16px; }
     .gallery-thumbs { grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); }
     .lightbox-nav { padding: 10px; font-size: 28px; }
+    .hide-mobile { display: none !important; }
   }
 
   /* ===== ANIMATIONS ===== */
@@ -437,6 +525,24 @@
     13 500 $ CAD
     <div class="hero-price-note" data-lang-en>Negotiable</div>
     <div class="hero-price-note" data-lang-fr>À discuter</div>
+  </div>
+  <div class="hero-actions">
+    <a href="tel:+14186640761" class="hero-action-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      <span data-lang-en>Call</span><span data-lang-fr>Appeler</span>
+    </a>
+    <a href="mailto:allo@mgb1980.info" class="hero-action-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4l-10 8L2 4"/></svg>
+      <span data-lang-en>Email</span><span data-lang-fr>Courriel</span>
+    </a>
+    <button class="hero-action-btn" onclick="sharePage()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+      <span data-lang-en>Share</span><span data-lang-fr>Partager</span>
+    </button>
+    <button class="hero-action-btn hide-mobile" onclick="bookmarkPage()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+      <span data-lang-en>Bookmark</span><span data-lang-fr>Signet</span>
+    </button>
   </div>
   <div class="hero-scroll" data-lang-en>
     <span>Scroll</span>
@@ -611,6 +717,17 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4l-10 8L2 4"/></svg>
       allo@mgb1980.info
     </a>
+    <div class="action-buttons">
+      <button class="action-btn" onclick="sharePage()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        <span data-lang-en>Share</span><span data-lang-fr>Partager</span>
+      </button>
+      <button class="action-btn hide-mobile" onclick="bookmarkPage()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+        <span data-lang-en>Bookmark</span><span data-lang-fr>Signet</span>
+      </button>
+    </div>
+    <div class="toast" id="toast"></div>
   </div>
 </section>
 
@@ -685,6 +802,42 @@
       b.classList.toggle('active', b.textContent.trim() === lang.toUpperCase());
     });
     document.documentElement.lang = lang;
+  }
+
+  // Share
+  function sharePage() {
+    const shareData = {
+      title: '1980 MG MGB Roadster — À Vendre / For Sale',
+      text: 'MG MGB Roadster 1980 — 92 047 km — Québec, QC — 13 500 $ CAD',
+      url: window.location.href
+    };
+    if (navigator.share) {
+      navigator.share(shareData).catch(() => {});
+    } else {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        showToast(document.documentElement.lang === 'fr' ? 'Lien copié!' : 'Link copied!');
+      }).catch(() => {
+        showToast(document.documentElement.lang === 'fr' ? 'Impossible de copier' : 'Could not copy');
+      });
+    }
+  }
+
+  // Bookmark
+  function bookmarkPage() {
+    const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+    const key = isMac ? '⌘+D' : 'Ctrl+D';
+    const msg = document.documentElement.lang === 'fr'
+      ? 'Appuyez sur ' + key + ' pour ajouter aux signets'
+      : 'Press ' + key + ' to bookmark this page';
+    showToast(msg);
+  }
+
+  // Toast notification
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3000);
   }
 
   // Scroll animations
